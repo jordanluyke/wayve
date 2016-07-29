@@ -1,0 +1,43 @@
+.tone-entry.tone-entry-row([ngClass]="{temp: entry.temp}")
+    .delete-ctnr
+        .fa.fa-minus-circle((click)="clickRemove()", [hidden]="entry.temp")
+    .frequency-ctnr
+        .input-group
+            input.form-control([(ngModel)]="entry.frequency", [disabled]="entry.started", (ngModelChange)="addEntryIfTemp(entry)", [ngClass]="{error: !validateInputNumber(entry.frequency)}" type="text" placeholder="Hz")
+            .input-group-btn
+                button.btn.btn-primary.dropdown-toggle([disabled]="entry.started" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") {{entry.oscillationType}}
+                .dropdown-menu
+                    span.dropdown-item((click)="entry.oscillationType = 'sine'", [ngClass]="{active: entry.oscillationType == 'sine'}") sine
+                    span.dropdown-item((click)="entry.oscillationType = 'square'", [ngClass]="{active: entry.oscillationType == 'square'}") square
+                    span.dropdown-item((click)="entry.oscillationType = 'triangle'", [ngClass]="{active: entry.oscillationType == 'triangle'}") triangle
+                    span.dropdown-item((click)="entry.oscillationType = 'sawtooth'", [ngClass]="{active: entry.oscillationType == 'sawtooth'}") sawtooth
+    .delay-ctnr
+        .input-group
+            input.form-control([(ngModel)]="entry.delayAmount", [disabled]="entry.started", [ngClass]="{error: entry.delayAmount && !validateInputNumber(entry.delayAmount)}" type="text" placeholder="0")
+            .input-group-btn
+                button.btn.btn-primary.dropdown-toggle([disabled]="entry.started" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") {{entry.delayUnit | timeunit : "shortname"}}
+                .dropdown-menu
+                    span.dropdown-item((click)="entry.delayUnit = TimeUnit.MILLISECONDS", [ngClass]="{active: entry.delayUnit == TimeUnit.MILLISECONDS}") {{TimeUnit.MILLISECONDS | timeunit : "shortname"}}
+                    span.dropdown-item((click)="entry.delayUnit = TimeUnit.SECONDS", [ngClass]="{active: entry.delayUnit == TimeUnit.SECONDS}") {{TimeUnit.SECONDS | timeunit : "shortname"}}
+                    span.dropdown-item((click)="entry.delayUnit = TimeUnit.MINUTES", [ngClass]="{active: entry.delayUnit == TimeUnit.MINUTES}") {{TimeUnit.MINUTES | timeunit : "shortname"}}
+                    span.dropdown-item((click)="entry.delayUnit = TimeUnit.HOURS", [ngClass]="{active: entry.delayUnit == TimeUnit.HOURS}") {{TimeUnit.HOURS | timeunit : "shortname"}}
+    .duration-ctnr
+        .input-group
+            input.form-control([(ngModel)]="entry.durationAmount", [disabled]="entry.started", [ngClass]="{error: entry.durationAmount && !validateInputNumber(entry.durationAmount)}" type="text" placeholder="0")
+            .input-group-btn
+                button.btn.btn-primary.dropdown-toggle([disabled]="entry.started" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") {{entry.durationUnit | timeunit : "shortname"}}
+                .dropdown-menu
+                    span.dropdown-item((click)="entry.durationUnit = TimeUnit.MILLISECONDS", [ngClass]="{active: entry.durationUnit == TimeUnit.MILLISECONDS}") {{TimeUnit.MILLISECONDS | timeunit : "shortname"}}
+                    span.dropdown-item((click)="entry.durationUnit = TimeUnit.SECONDS", [ngClass]="{active: entry.durationUnit == TimeUnit.SECONDS}") {{TimeUnit.SECONDS | timeunit : "shortname"}}
+                    span.dropdown-item((click)="entry.durationUnit = TimeUnit.MINUTES", [ngClass]="{active: entry.durationUnit == TimeUnit.MINUTES}") {{TimeUnit.MINUTES | timeunit : "shortname"}}
+                    span.dropdown-item((click)="entry.durationUnit = TimeUnit.HOURS", [ngClass]="{active: entry.durationUnit == TimeUnit.HOURS}") {{TimeUnit.HOURS | timeunit : "shortname"}}
+    .volume-ctnr
+        .input-group
+            input.form-control([(ngModel)]="entry.volume", [disabled]="entry.started", (change)="entry.volume = MathUtil.clamp(entry.volume, 0, 100) || 100" type="text" placeholder="0")
+            span.input-group-addon %
+    .pan-ctnr
+        .range-ctnr
+            p.left-desc([ngClass]="{disabled: entry.started}") L
+            p.right-desc([ngClass]="{disabled: entry.started}") R
+            input.form-control.range-input([(ngModel)]="entry.pan", [disabled]="entry.started" type="range" min="-1" max="1" step="0.01")
+        input.form-control.text-input([(ngModel)]="entry.pan", [disabled]="entry.started", (change)="entry.pan = MathUtil.clamp(entry.pan, -1, 1) || 0" type="text")

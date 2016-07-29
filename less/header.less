@@ -1,0 +1,48 @@
+.header {
+    background-color: @color-theme-3;
+    .container {
+        min-height: 100px;
+        .title-ctnr {
+            margin-top: 16px;
+            .title {
+                font-weight: 300;
+                color: white;
+                font-size: 48px;
+                margin: 0;
+                letter-spacing: 2px;
+            }
+        }
+        .gh-btn-ctnr {
+            margin-top: 44px;
+            float: right;
+            a.btn-github {
+                background-color: #eee;
+                background-image: linear-gradient(to bottom,#fcfcfc 0,#eee 100%);
+                background-repeat: no-repeat;
+                padding: 2px 5px 2px 4px;
+                color: #333;
+                text-decoration: none;
+                text-shadow: 0 1px 0 #fff;
+                white-space: nowrap;
+                cursor: pointer;
+                border-radius: 2px;
+                height: 20px;
+                &:hover {
+                    background-color: #ddd;
+                    background-image: linear-gradient(to bottom,#eee 0,#ddd 100%);
+                }
+                .octicon-mark-github {
+                    font-size: 14px;
+                    margin-left: 1px;
+                }
+                .desc {
+                    font-weight: 500;
+                    font-size: 11px;
+                    vertical-align: middle;
+                    margin-left: 4px;
+                    margin-right: 1px;
+                }
+            }
+        }
+    }
+}

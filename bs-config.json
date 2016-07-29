@@ -1,0 +1,9 @@
+{
+    "port": 4000,
+    "server": {
+        "baseDir": "site"
+    },
+    "watchOptions": {
+        "ignored": "node_modules"
+    }
+}

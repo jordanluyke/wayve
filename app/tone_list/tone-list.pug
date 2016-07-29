@@ -1,0 +1,23 @@
+.tone-list
+    .list-header
+        .play-pause-ctnr
+            button.play-pause-btn((click)="startAll()", [hidden]="isPlaying", [disabled]="!(entriesValid() | async)")
+                .fa.fa-play
+            button.play-pause-btn((click)="stopAll()", [hidden]="!isPlaying")
+                .fa.fa-pause
+        .time-elapsed-ctnr
+            p.time {{elapsed | timeElapsed}}
+    .tone-entry-row
+        .delete-ctnr
+        .frequency-ctnr
+            span Frequency
+        .delay-ctnr
+            span Delay
+        .duration-ctnr
+            span Duration
+        .volume-ctnr
+            span Volume
+        .pan-ctnr
+            span Pan
+    div(*ngFor="let entry of entries")
+        tone-entry-component([entry]="entry")

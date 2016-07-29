@@ -1,0 +1,43 @@
+{
+  "name": "wayve",
+  "version": "0.1.0",
+  "description": "Time-scheduled audio signal generator",
+  "main": "site/index.html",
+  "scripts": {
+    "start": "node bin/dev.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jordanluyke/wayve.git"
+  },
+  "author": "Jordan Luyke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jordanluyke/wayve/issues"
+  },
+  "homepage": "https://github.com/jordanluyke/wayve#readme",
+  "dependencies": {
+    "@angular/common": "^2.0.0-rc.4",
+    "@angular/compiler": "^2.0.0-rc.4",
+    "@angular/core": "^2.0.0-rc.4",
+    "@angular/platform-browser": "^2.0.0-rc.4",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.4",
+    "bootstrap": "^4.0.0-alpha.3",
+    "browser-sync": "^2.13.0",
+    "chokidar": "^1.6.0",
+    "es6-shim": "^0.35.1",
+    "font-awesome": "^4.6.3",
+    "fs-extra": "^0.30.0",
+    "glob": "^7.0.5",
+    "less": "^2.7.1",
+    "octicons": "^4.3.0",
+    "pug": "^2.0.0-beta4",
+    "reflect-metadata": "^0.1.3",
+    "roboto-fontface": "^0.5.0",
+    "rxjs": "5.0.0-beta.10",
+    "source-sans-pro": "^2.0.10",
+    "systemjs": "^0.19.35",
+    "typescript": "^2.0.0",
+    "zone.js": "^0.6.12"
+  }
+}

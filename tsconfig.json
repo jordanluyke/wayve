@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "system",
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "outFile": "site/js/client.js",
+        "pretty": true,
+        "sourceMap": true,
+        "strictNullChecks": false,
+        "target": "es6"
+    },
+    "exclude": [
+        "node_modules",
+        "site",
+        "typings/main",
+        "typings/main.d.ts"
+    ]
+}

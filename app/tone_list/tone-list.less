@@ -1,0 +1,60 @@
+@import "less/variables.less";
+@import "less/mixins.less";
+@import "app/tone_list/tone_entry/entry-row-cells.less";
+
+.tone-list {
+    .list-header {
+        width: 905px;
+        display: inline-block;
+        margin-bottom: 22px;
+        .play-pause-ctnr {
+            margin-left: 38px;
+            display: inline-block;
+            .play-pause-btn {
+                padding: 10px 0;
+                width: 100px;
+                text-align: center;
+                background-color: @color-theme-complementary;
+                display: inline-block;
+                border-radius: 3px;
+                cursor: pointer;
+                border: 0;
+                outline: 0;
+                transition: background-color 100ms;
+                .no-select;
+                .fa-play, .fa-pause {
+                    font-size: 40px;
+                    color: white;
+                }
+                &:hover {
+                    background-color: darken(@color-theme-complementary, 5%);
+                }
+                &:disabled {
+                    cursor: not-allowed;
+                    background-color: #CFCFCF;
+                }
+            }
+        }
+        .time-elapsed-ctnr {
+            display: inline-block;
+            margin-top: 3px;
+            margin-left: 26px;
+            .time {
+                font-size: 36px;
+                font-weight: 300;
+                margin: 0;
+            }
+        }
+    }
+    .tone-entry-row {
+        .delete-ctnr {
+            .fa.fa-plus {
+                cursor: pointer;
+                font-size: 20px;
+                margin-top: 2px;
+                margin-left: 7px;
+                .no-select;
+            }
+        }
+    }
+}

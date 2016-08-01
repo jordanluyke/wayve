@@ -95,6 +95,7 @@ fs.copySync('public', 'site');
     'node_modules/symbol-observable',
     'node_modules/@angular',
     //
+    'node_modules/jquery',
     'node_modules/bootstrap',
     'node_modules/roboto-fontface',
     'node_modules/font-awesome',

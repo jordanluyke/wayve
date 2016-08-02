@@ -7,6 +7,11 @@ var pug = require('pug');
 var less = require('less');
 var childProcess = require('child_process');
 var bs = require('browser-sync').create();
+var argv = process.argv.slice(2);
+
+var argOptions = {
+    build: argv[0] == 'build'
+};
 
 fs.removeSync('site');
 
@@ -14,15 +19,16 @@ fs.removeSync('site');
 
 childProcess.execSync('tsc');
 
-glob('**/*.ts', {
-    ignore: [
-        'node_modules/**/*',
-        'site/**/*'
-    ]
-}, (err, files) => {
-    chokidar.watch(files)
-        .on('change', () => childProcess.execSync('tsc'));
-});
+if(!argOptions.build)
+    glob('**/*.ts', {
+        ignore: [
+            'node_modules/**/*',
+            'site/**/*'
+        ]
+    }, (err, files) => {
+        chokidar.watch(files)
+            .on('change', () => childProcess.execSync('tsc'));
+    });
 
 // pug
 
@@ -31,10 +37,11 @@ glob('**/*.ts', {
         pretty: true
     }));
     build();
-    glob('views/*.pug', (err, files) => {
-        chokidar.watch(files)
-            .on('change', () => build());
-    });
+    if(!argOptions.build)
+        glob('views/*.pug', (err, files) => {
+            chokidar.watch(files)
+                .on('change', () => build());
+        });
 })();
 
 
@@ -50,8 +57,9 @@ glob('**/*.ts', {
     }
     files.forEach(file => {
         build(file);
-        chokidar.watch(file)
-            .on('change', () => build(file));
+        if(!argOptions.build)
+            chokidar.watch(file)
+                .on('change', () => build(file));
     });
 })();
 
@@ -78,8 +86,9 @@ glob('**/*.ts', {
     }
 
     build();
-    chokidar.watch(glob.sync('**/*.less'))
-        .on('change', () => build());
+    if(!argOptions.build)
+        chokidar.watch(glob.sync('**/*.less'))
+            .on('change', () => build());
 })();
 
 // copy
@@ -104,22 +113,24 @@ fs.copySync('public', 'site');
 
 // serve
 
-bs.init({
-    files: [{
-        match: 'site/**/*',
-        fn: (event, file) => {
-            if(event === 'change')
-                bs.reload();
-        },
-        options: {
-            ignored: [
-                'site/node_modules',
-                'site/fonts'
-            ]
-        }
-    }],
-    notify: false,
-    port: 4000,
-    server: './site',
-    ui: false
-});
+
+if(!argOptions.build)
+    bs.init({
+        files: [{
+            match: 'site/**/*',
+            fn: (event, file) => {
+                if(event === 'change')
+                    bs.reload();
+            },
+            options: {
+                ignored: [
+                    'site/node_modules',
+                    'site/fonts'
+                ]
+            }
+        }],
+        notify: false,
+        port: 4000,
+        server: './site',
+        ui: false
+    });

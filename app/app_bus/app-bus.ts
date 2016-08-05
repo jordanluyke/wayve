@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subscription, Subject } from 'rxjs/Rx';
+import { Subscription, Subject, Observable } from 'rxjs/Rx';
 import { AppEvent } from './app-event';
 import { Multimap, ArrayListMultimap } from './../util';
 
@@ -28,7 +28,7 @@ export class AppBus {
     }
 
     public publish(event: AppEvent): void {
-        this.subscribers.get(event.constructor.name)
-            .forEach(subscription => subscription.next(event));
+        Observable.from(this.subscribers.get(event.constructor.name))
+            .subscribe(subscription => subscription.next(event));
     }
 }

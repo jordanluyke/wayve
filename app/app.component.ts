@@ -6,5 +6,4 @@ import { ToneListComponent } from './tone_list/tone-list.component';
     selector: 'waveform-app',
     templateUrl: './app/app.html'
 })
-export class AppComponent {
-}
+export class AppComponent {}

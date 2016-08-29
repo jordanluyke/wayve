@@ -1,4 +1,4 @@
-import { RandomUtil } from './../util/random-util';
+import { RandomUtil } from './../util';
 
 export abstract class AppEvent {
 

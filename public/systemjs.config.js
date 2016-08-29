@@ -27,12 +27,12 @@
         'forms',
         'platform-browser',
         'platform-browser-dynamic'
-    ].forEach(function(name) {
-        packages['@angular/'+name] = {
-            main: '/bundles/' + name + '.umd.js',
+    ].forEach(name => {
+        packages[`@angular/${name}`] = {
+            main: `/bundles/${name}.umd.min.js`,
             defaultExtension: 'js'
         };
-    })
+    });
 
     var config = {
         map: map,

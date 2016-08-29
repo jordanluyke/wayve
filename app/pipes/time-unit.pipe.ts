@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TimeUnit } from './../util/time-unit';
+import { TimeUnit } from './../util';
 
 /**
  * usage:

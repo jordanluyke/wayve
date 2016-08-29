@@ -49,8 +49,8 @@ if(!argOptions.build)
     var files = glob.sync('app/**/*.pug');
     var build = (file) => {
         var dir = file.split('/').slice(0, -1).join('/');
-        fs.mkdirpSync('site/' + dir);
-        var outFile = 'site/' + file.split('.')[0] + '.html';
+        fs.mkdirpSync(`site/${dir}`);
+        var outFile = `site/${file.split('.')[0]}.html`;
         fs.outputFileSync(outFile, pug.renderFile(file, {
             pretty: true
         }));
@@ -75,8 +75,8 @@ if(!argOptions.build)
 
         glob.sync('app/**/*.less').forEach(file => {
             var dir = file.split('/').slice(0, -1).join('/');
-            fs.mkdirpSync('site/' + dir);
-            var outFile = 'site/' + file.split('.')[0] + '.css';
+            fs.mkdirpSync(`site/${dir}`);
+            var outFile = `site/${file.split('.')[0]}.css`;
             less.render(fs.readFileSync(file, 'utf8'))
                 .then(
                     data => fs.outputFileSync(outFile, data.css),
@@ -96,23 +96,22 @@ if(!argOptions.build)
 fs.copySync('public', 'site');
 
 [
-    'node_modules/es6-shim',
-    'node_modules/zone.js',
-    'node_modules/reflect-metadata',
-    'node_modules/systemjs',
-    'node_modules/rxjs',
-    'node_modules/symbol-observable',
-    'node_modules/@angular',
+    'es6-shim',
+    'zone.js',
+    'reflect-metadata',
+    'systemjs',
+    'rxjs',
+    'symbol-observable',
+    '@angular',
     //
-    'node_modules/jquery',
-    'node_modules/bootstrap',
-    'node_modules/roboto-fontface',
-    'node_modules/font-awesome',
-    'node_modules/octicons'
-].forEach(dir => fs.copySync(dir, 'site/' + dir));
+    'jquery',
+    'bootstrap',
+    'roboto-fontface',
+    'font-awesome',
+    'octicons'
+].forEach(dir => fs.copySync(`node_modules/${dir}`, `site/node_modules/${dir}`));
 
 // serve
-
 
 if(!argOptions.build)
     bs.init({

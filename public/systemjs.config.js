@@ -11,12 +11,13 @@
             main: 'main.js',
             defaultExtension: 'js'
         },
-       'rxjs': {
+        'rxjs': {
+            main: '/bundles/Rx.umd.min.js',
             defaultExtension: 'js'
         },
         'symbol-observable': {
-            defaultExtension: 'js',
             main: 'index.js',
+            defaultExtension: 'js'
         }
     };
 

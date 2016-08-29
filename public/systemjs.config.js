@@ -12,7 +12,7 @@
             defaultExtension: 'js'
         },
         'rxjs': {
-            main: '/bundles/Rx.umd.min.js',
+            main: 'bundles/Rx.umd.min.js',
             defaultExtension: 'js'
         },
         'symbol-observable': {
@@ -30,7 +30,7 @@
         'platform-browser-dynamic'
     ].forEach(name => {
         packages[`@angular/${name}`] = {
-            main: `/bundles/${name}.umd.min.js`,
+            main: `bundles/${name}.umd.min.js`,
             defaultExtension: 'js'
         };
     });

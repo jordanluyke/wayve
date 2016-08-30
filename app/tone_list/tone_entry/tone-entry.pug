@@ -1,6 +1,6 @@
 .tone-entry.tone-entry-row([ngClass]="{temp: entry.temp}")
     .delete-ctnr
-        .fa.fa-minus-circle((click)="clickRemove()", [hidden]="entry.temp")
+        .fa.fa-minus-circle((click)="clickRemove()", [hidden]="entry.started || entry.temp")
     .frequency-ctnr
         .input-group
             input.form-control([(ngModel)]="entry.frequency", [disabled]="entry.started", (ngModelChange)="addEntryIfTemp(entry)", [ngClass]="{error: !validateInputNumber(entry.frequency)}" type="text" placeholder="Hz")

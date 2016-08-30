@@ -1,7 +1,7 @@
 import { Observable, Subscription } from 'rxjs/Rx';
-import { TimeUnit, RandomUtil } from './../../util';
+import { TimeUnit, RandomUtil } from './../../util/index';
 import { AppBus } from './../../app_bus/app-bus';
-import { ToneEndedEvent } from './events';
+import { ToneEndedEvent } from './events/index';
 
 export class ToneEntry {
 

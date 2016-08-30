@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subscription, Subject, Observable } from 'rxjs/Rx';
 import { AppEvent } from './app-event';
-import { Multimap, ArrayListMultimap } from './../util';
+import { Multimap, ArrayListMultimap } from './../util/index';
 
 /**
  * Event bus

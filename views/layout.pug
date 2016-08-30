@@ -13,22 +13,11 @@ html
         include header
         block content
 
-        script(src="node_modules/jquery/dist/jquery.slim.min.js")
-        script(src="node_modules/bootstrap/dist/js/bootstrap.min.js")
-
-        script(src="node_modules/es6-shim/es6-shim.min.js")
-        script(src="node_modules/zone.js/dist/zone.min.js?main=browser")
-        script(src="node_modules/reflect-metadata/Reflect.js")
-        script(src="node_modules/systemjs/dist/system.js")
-
-        script(src="systemjs.config.js")
-        script(src="js/client.js")
+        script(src="js/vendor.js")
+        script(src="js/app.js")
 
         script.
             if(window.AudioContext == undefined) {
                 alert("AudioContext is not supported in this browser");
                 throw new Error("AudioContext not supported");
             }
-
-            System.import('main')
-                .catch(function(err) { console.error(err); });

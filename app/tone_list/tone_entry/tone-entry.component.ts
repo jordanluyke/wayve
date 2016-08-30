@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { ToneEntry } from './tone-entry';
-import { TimeUnit, MathUtil } from './../../util';
+import { TimeUnit, MathUtil } from './../../util/index';
 import { AppBus } from './../../app_bus/app-bus';
-import { ToneRemovedEvent, ToneAddedEvent } from './events';
-import { TimeUnitPipe } from './../../pipes';
+import { ToneRemovedEvent, ToneAddedEvent } from './events/index';
+import { TimeUnitPipe } from './../../pipes/index';
 
 @Component({
     pipes: [TimeUnitPipe],

@@ -97,14 +97,8 @@ if(!args.build)
 fs.copySync('public', 'site');
 
 [
-    'es6-shim',
-    'zone.js',
-    'reflect-metadata',
-    'systemjs',
-    'rxjs',
-    'symbol-observable',
     '@angular',
-    'jquery',
+    'rxjs',
     'bootstrap',
     'roboto-fontface',
     'font-awesome',

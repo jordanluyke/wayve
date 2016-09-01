@@ -7,7 +7,7 @@ export class MathUtil {
         return Math.min(Math.max(val, min), max);
     }
 
-    public static numberWithinPercentOfMod(value: number, mod: number, percent: number) {
+    public static numberWithinPercentOfMod(value: number, mod: number, percent: number): boolean {
         let t = (value % mod) / mod;
         return Math.abs(1 - t) < percent / 100 || t < percent / 100;
     }

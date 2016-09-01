@@ -16,7 +16,7 @@ export class TimeElapsedPipe implements PipeTransform {
     private datePipe: DatePipe;
 
     constructor() {
-        this.datePipe = new DatePipe();
+        this.datePipe = new DatePipe("en-US");
     }
 
     transform(duration: number, timeUnit: TimeUnit = TimeUnit.MILLISECONDS) {

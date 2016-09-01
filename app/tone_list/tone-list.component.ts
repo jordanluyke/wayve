@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ToneEntryComponent } from './tone_entry/tone-entry.component';
 import { ToneEntry } from './tone_entry/tone-entry';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { ToneEndedEvent, ToneRemovedEvent, ToneAddedEvent } from './tone_entry/events/index';
 import { AppBus } from './../app_bus/app-bus';
-import { TimeElapsedPipe } from './../pipes/index';
 import { Multimap, ArrayListMultimap, MathUtil } from './../util/index';
 
 @Component({
-    directives: [ToneEntryComponent],
-    pipes: [TimeElapsedPipe],
     providers: [AppBus],
     selector: 'tone-list-component',
     styleUrls: ['./app/tone_list/tone-list.css'],

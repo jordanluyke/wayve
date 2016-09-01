@@ -3,10 +3,8 @@ import { ToneEntry } from './tone-entry';
 import { TimeUnit, MathUtil } from './../../util/index';
 import { AppBus } from './../../app_bus/app-bus';
 import { ToneRemovedEvent, ToneAddedEvent } from './events/index';
-import { TimeUnitPipe } from './../../pipes/index';
 
 @Component({
-    pipes: [TimeUnitPipe],
     selector: 'tone-entry-component',
     styleUrls: ['./app/tone_list/tone_entry/tone-entry.css'],
     templateUrl: './app/tone_list/tone_entry/tone-entry.html'

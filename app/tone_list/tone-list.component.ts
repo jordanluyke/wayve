@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs/Rx';
 import { ToneEndedEvent, ToneRemovedEvent, ToneAddedEvent } from './tone_entry/events/index';
 import { AppBus } from './../app_bus/app-bus';
 import { Multimap, ArrayListMultimap, MathUtil } from './../util/index';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     providers: [AppBus],
@@ -20,16 +21,32 @@ export class ToneListComponent implements OnInit {
     public elapsed: number = 0;
     private elapsedSubscription: Subscription;
 
-    constructor(private appBus: AppBus) {
+    constructor(private appBus: AppBus, private route: ActivatedRoute) {
     }
 
     ngOnInit() {
         this.addEntry(true);
         this.addSubscriptions();
+        this.route.queryParams.subscribe(
+            params => {
+                if(params["entries"] != null) {
+                    try {
+                        let entries = JSON.parse(params["entries"]);
+                        this.entries = [];
+                        this.addEntriesFromQueryParam(entries);
+                    } catch(err) {
+                        console.log(params["entries"]);
+                        throw new Error("Unable to parse entries");
+                    }
+                }
+                if(params["start"] == "true")
+                    this.startAll();
+            }
+        );
     }
 
     public addEntry(temp: boolean = false): void {
-        let entry = new ToneEntry(this.appBus);
+        let entry = new ToneEntry();
         entry.temp = temp;
         this.entries.push(entry);
     }
@@ -42,7 +59,7 @@ export class ToneListComponent implements OnInit {
         if(this.isPlaying)
             throw new Error("List is already playing");
 
-        this.entries.pop();
+        this.entries = this.entries.filter(entry => !entry.temp);
 
         Observable.from(this.entries)
             .flatMap(entry => entry.start(this.audioContext))
@@ -128,5 +145,19 @@ export class ToneListComponent implements OnInit {
                 }
             )
         );
+    }
+
+    private addEntriesFromQueryParam(entries: any[]): void {
+        Observable.from(entries)
+            .map(input => {
+                let entry = new ToneEntry();
+                for(let key in input) {
+                    entry.frequency = input["frequency"];
+                }
+                return entry;
+            })
+            .subscribe(
+                entry => this.entries.push(entry)
+            );
     }
 }

@@ -1,6 +1,5 @@
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Observable, Subscription, Subject } from 'rxjs/Rx';
 import { TimeUnit, RandomUtil } from './../../util/index';
-import { AppBus } from './../../app_bus/app-bus';
 import { ToneEndedEvent } from './events/index';
 
 export class ToneEntry {
@@ -21,8 +20,9 @@ export class ToneEntry {
     public started: boolean = false;
     public ended: boolean = false;
     public temp: boolean = false;
+    public onEnded: Subject<{}> = new Subject<{}>();
 
-    constructor(private appBus: AppBus) {
+    constructor() {
     }
 
     public start(audioContext: AudioContext): Observable<{}> {
@@ -37,7 +37,7 @@ export class ToneEntry {
             .subscribe(
                 event => {
                     this.ended = true;
-                    this.appBus.publish(new ToneEndedEvent(this));
+                    this.onEnded.next(null);
                 },
                 err => {
                     throw new Error(err);

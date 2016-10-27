@@ -26,7 +26,8 @@ var packages = {
     'core',
     'forms',
     'platform-browser',
-    'platform-browser-dynamic'
+    'platform-browser-dynamic',
+    'router'
 ].forEach(name => {
     packages[`@angular/${name}`] = {
         main: `bundles/${name}.umd.min.js`,

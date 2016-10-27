@@ -1,15 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ToneEntry } from './tone-entry';
 import { TimeUnit, MathUtil } from './../../util/index';
 import { AppBus } from './../../app_bus/app-bus';
-import { ToneRemovedEvent, ToneAddedEvent } from './events/index';
+import { ToneRemovedEvent, ToneAddedEvent, ToneEndedEvent } from './events/index';
 
 @Component({
     selector: 'tone-entry-component',
     styleUrls: ['./app/tone_list/tone_entry/tone-entry.css'],
     templateUrl: './app/tone_list/tone_entry/tone-entry.html'
 })
-export class ToneEntryComponent {
+export class ToneEntryComponent implements OnInit {
 
     @Input() entry: ToneEntry;
 
@@ -17,6 +17,10 @@ export class ToneEntryComponent {
     public MathUtil: any = MathUtil;
 
     constructor(private appBus: AppBus) {
+    }
+
+    public ngOnInit(): void {
+        this.entry.onEnded.subscribe(Void => this.appBus.publish(new ToneEndedEvent(this.entry)));
     }
 
     public clickRemove(): void {

@@ -60,12 +60,14 @@ let compileTs = () => {
 // pug
 
 let buildPug = () => {
-    let timestamp = new Date().getTime();
+    let path = "";
+    if(!argv.dev)
+        path = "/wayve";
     let buildIndex = () => fs.outputFileSync(`${rootDir}/site/index.html`, pug.renderFile(`${rootDir}/views/index.pug`, {
         pretty: argv.dev,
-        timestamp: timestamp,
+        path: path,
         appScripts: pug.render(fs.readFileSync(`${rootDir}/views/partials/${(argv.dev ? "dev-scripts.pug" : "prod-scripts.pug")}`), {
-            timestamp: timestamp
+            path: path
         })
     }));
     buildIndex();

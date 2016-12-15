@@ -3,10 +3,10 @@ Wayve
 
 Multiple time-scheduled audio signals
 
+- Angular
 - TypeScript
-- Angular 2
 - RxJS
-- ES6
+- ES2015
 
 Query param support:
 

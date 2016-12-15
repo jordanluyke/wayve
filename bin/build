@@ -125,7 +125,7 @@ let buildLess = () => {
 // copy
 
 let copy = () => {
-    fs.copySync('public', 'site');
+    // fs.copySync('public', 'site');
 
     if(argv.dev)
         fs.copySync(`${rootDir}/systemjs.config.js`, `${rootDir}/site/systemjs.config.js`);

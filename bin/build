@@ -185,6 +185,7 @@ let rollup = () => {
 let cleanup = () => {
     fs.removeSync(`${rootDir}/site/app`);
     fs.removeSync(`${rootDir}/site/site`);
+    fs.removeSync(`${rootDir}/site/node_modules/@angular`);
 };
 
 // Build

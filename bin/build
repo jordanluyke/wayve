@@ -1,0 +1,210 @@
+#!/usr/bin/env node
+
+const fs = require('fs-extra');
+const glob = require('glob');
+const chokidar = require('chokidar');
+const pug = require('pug');
+const less = require('less');
+const childProcess = require('child_process');
+const bs = require('browser-sync').create();
+const deasync = require('deasync');
+const argv = require('minimist')(process.argv.slice(2));
+const rootDir = __dirname.split("/").slice(0, -1).join("/");
+
+// ts
+
+let compileTs = () => {
+    let compile = (options = {}) => {
+        let done = false;
+        let cmd = argv.dev
+            ? `${rootDir}/node_modules/.bin/tsc -p ${rootDir}/tsconfig.json`
+            : `${rootDir}/node_modules/.bin/ngc -p ${rootDir}/tsconfig-aot.json`;
+        childProcess.exec(cmd, (err, stdout, stderr) => {
+            done = true;
+            if(err || stderr) {
+                console.log("Compile failed");
+                if(options.isWatch) {
+                    console.log(stderr || stdout);
+                    return;
+                } else
+                    throw stderr || stdout;
+            }
+            if(options.isWatch)
+                console.log("Done");
+        });
+        deasync.loopWhile(() => !done)
+    };
+
+    let watch = () => {
+        glob('app/**/*.ts', {
+            cwd: rootDir
+        }, (err, files) => {
+            if(err) {
+                console.log(err);
+                return;
+            }
+            chokidar.watch(files.map(file => `${file}`))
+                .on('change', file => {
+                    console.log(`Changed: ${file.slice(rootDir.length+1)}`);
+                    console.log("Compiling..");
+                    compile({isWatch: true});
+                });
+        });
+    };
+
+    compile();
+    if(argv.dev)
+        watch();
+};
+
+// pug
+
+let buildPug = () => {
+    let timestamp = new Date().getTime();
+    let buildIndex = () => fs.outputFileSync(`${rootDir}/site/index.html`, pug.renderFile(`${rootDir}/views/index.pug`, {
+        pretty: argv.dev,
+        timestamp: timestamp,
+        appScripts: pug.render(fs.readFileSync(`${rootDir}/views/partials/${(argv.dev ? "dev-scripts.pug" : "prod-scripts.pug")}`), {
+            timestamp: timestamp
+        })
+    }));
+    buildIndex();
+    if(argv.dev)
+        glob('views/*.pug', (err, files) => {
+            chokidar.watch(files)
+                .on('change', () => buildIndex());
+        });
+
+    let files = glob.sync('app/**/*.pug');
+    let buildTemplates = (file) => {
+        let dir = file.split('/').slice(0, -1).join('/');
+        fs.mkdirpSync(`site/${dir}`);
+        let outFile = `site/${file.split('.')[0]}.html`;
+        fs.outputFileSync(outFile, pug.renderFile(file, {
+            pretty: true
+        }));
+    }
+    files.forEach(file => {
+        buildTemplates(file);
+        if(argv.dev)
+            chokidar.watch(file)
+                .on('change', () => buildTemplates(file));
+    });
+};
+
+// less
+
+let buildLess = () => {
+    let build = () => {
+        less.render(fs.readFileSync('less/client.less', 'utf8'))
+            .then(
+                data => fs.outputFileSync('site/css/client.css', data.css),
+                err => console.log(err)
+            );
+
+        glob.sync('app/**/*.less').forEach(file => {
+            let dir = file.split('/').slice(0, -1).join('/');
+            fs.mkdirpSync(`site/${dir}`);
+            let outFile = `site/${file.split('.')[0]}.css`;
+            less.render(fs.readFileSync(file, 'utf8'))
+                .then(
+                    data => fs.outputFileSync(outFile, data.css),
+                    err => console.log(err)
+                );
+        });
+    }
+
+    build();
+    if(argv.dev)
+        chokidar.watch(glob.sync('**/*.less'))
+            .on('change', () => build());
+};
+
+// copy
+
+let copy = () => {
+    fs.copySync('public', 'site');
+
+    if(argv.dev)
+        fs.copySync(`${rootDir}/systemjs.config.js`, `${rootDir}/site/systemjs.config.js`);
+
+    let packages = [
+        'bootstrap',
+        'roboto-fontface',
+        'font-awesome',
+        'octicons',
+        'jquery',
+        'bootstrap',
+    ];
+
+    if(argv.dev)
+        packages = packages.concat([
+            '@angular',
+            'rxjs',
+            'es6-shim',
+            'zone.js',
+            'reflect-metadata',
+            'systemjs',
+        ]);
+
+    packages.forEach(dir => fs.copySync(`node_modules/${dir}`, `site/node_modules/${dir}`));
+};
+
+// browserSync
+
+let browserSync = () => {
+    bs.init({
+        files: [{
+            match: 'site/**/*',
+            fn: (event, file) => {
+                if(event === 'change')
+                    bs.reload();
+            },
+            options: {
+                ignored: [
+                    'site/node_modules',
+                    'site/fonts'
+                ]
+            }
+        }],
+        notify: false,
+        port: 4000,
+        server: './site',
+        ui: false
+    });
+};
+
+// rollup
+
+let rollup = () => {
+    childProcess.execSync(`${rootDir}/node_modules/.bin/rollup -c ${rootDir}/rollup-config.js`)
+};
+
+// cleanup
+
+let cleanup = () => {
+    fs.removeSync(`${rootDir}/site/app`);
+    fs.removeSync(`${rootDir}/site/site`);
+};
+
+// Build
+
+console.log("Building..");
+
+fs.removeSync("site");
+if(!argv.dev)
+        fs.copySync(`${rootDir}/app`, `${rootDir}/site/app`);
+
+buildPug();
+buildLess();
+copy();
+compileTs();
+if(argv.dev) {
+    browserSync();
+} else {
+    rollup();
+    cleanup();
+}
+
+
+console.log("Done");

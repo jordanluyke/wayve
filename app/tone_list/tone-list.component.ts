@@ -7,10 +7,10 @@ import { Multimap, ArrayListMultimap, MathUtil } from './../util/index';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    providers: [AppBus],
+    moduleId: module.id,
     selector: 'tone-list-component',
-    styleUrls: ['./app/tone_list/tone-list.css'],
-    templateUrl: './app/tone_list/tone-list.html'
+    styleUrls: ['tone-list.css'],
+    templateUrl: 'tone-list.html'
 })
 export class ToneListComponent implements OnInit {
 

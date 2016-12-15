@@ -7,6 +7,7 @@ import { ToneListComponent } from './tone_list/tone-list.component';
 import { ToneEntryComponent } from './tone_list/tone_entry/tone-entry.component';
 import { routing } from './app.routing';
 import { RouterModule } from '@angular/router';
+import { AppBus } from './app_bus/app-bus';
 
 @NgModule({
     imports: [
@@ -20,7 +21,10 @@ import { RouterModule } from '@angular/router';
         TimeElapsedPipe,
         TimeUnitPipe,
         ToneListComponent,
-        ToneEntryComponent
+        ToneEntryComponent,
+    ],
+    providers: [
+        AppBus
     ],
     bootstrap: [AppComponent],
 })

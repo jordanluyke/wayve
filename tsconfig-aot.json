@@ -2,12 +2,11 @@
     "compilerOptions": {
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "module": "commonjs",
+        "module": "es2015",
         "moduleResolution": "node",
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "outDir": "site/app",
-        "pretty": true,
+        "outDir": "site",
         "sourceMap": true,
         "strictNullChecks": false,
         "suppressImplicitAnyIndexErrors": true,
@@ -16,10 +15,12 @@
             "node_modules/@types/"
         ]
     },
-    "include": [
-        "app/**/*"
+    "files": [
+        "site/app/app.module.ts",
+        "site/app/main-aot.ts"
     ],
-    "exclude": [
-        "app/main-aot.ts"
-    ]
+    "angularCompilerOptions": {
+        "genDir": "site",
+        "skipMetadataEmit": true
+    }
 }

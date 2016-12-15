@@ -5,9 +5,10 @@ import { AppBus } from './../../app_bus/app-bus';
 import { ToneRemovedEvent, ToneAddedEvent, ToneEndedEvent } from './events/index';
 
 @Component({
+    moduleId: module.id,
     selector: 'tone-entry-component',
-    styleUrls: ['./app/tone_list/tone_entry/tone-entry.css'],
-    templateUrl: './app/tone_list/tone_entry/tone-entry.html'
+    styleUrls: ['tone-entry.css'],
+    templateUrl: 'tone-entry.html'
 })
 export class ToneEntryComponent implements OnInit {
 

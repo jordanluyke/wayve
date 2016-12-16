@@ -129,6 +129,8 @@ let copy = () => {
 
     if(argv.dev)
         fs.copySync(`${rootDir}/systemjs.config.js`, `${rootDir}/site/systemjs.config.js`);
+    else
+        fs.copySync(`${rootDir}/_config.yml`, `${rootDir}/site/_config.yml`);
 
     let packages = [
         'bootstrap',

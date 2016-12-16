@@ -1,1 +1,1 @@
-include: ["node_modules","site/node_modules"]
+exclude: [] # stop excluding node_modules

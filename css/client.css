@@ -1,0 +1,74 @@
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+html,
+body {
+  font-family: -apple-system, 'Roboto', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  font-size: 14px;
+  color: #666666;
+  background-color: #fbfafa;
+  height: 100%;
+  min-width: 970px;
+}
+html .container,
+body .container {
+  min-width: 970px;
+}
+.header {
+  background-color: #3152AD;
+}
+.header .container {
+  min-height: 100px;
+}
+.header .container .title-ctnr {
+  margin-top: 16px;
+}
+.header .container .title-ctnr .title {
+  font-weight: 300;
+  color: white;
+  font-size: 48px;
+  margin: 0;
+  letter-spacing: 2px;
+}
+.header .container .gh-btn-ctnr {
+  margin-top: 44px;
+  float: right;
+}
+.header .container .gh-btn-ctnr a.btn-github {
+  background-color: #eee;
+  background-image: linear-gradient(to bottom, #fcfcfc 0, #eee 100%);
+  background-repeat: no-repeat;
+  padding: 2px 5px 2px 4px;
+  color: #333;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #fff;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: 2px;
+  height: 20px;
+}
+.header .container .gh-btn-ctnr a.btn-github:hover {
+  background-color: #ddd;
+  background-image: linear-gradient(to bottom, #eee 0, #ddd 100%);
+}
+.header .container .gh-btn-ctnr a.btn-github .octicon-mark-github {
+  font-size: 14px;
+  margin-left: 1px;
+}
+.header .container .gh-btn-ctnr a.btn-github .desc {
+  font-weight: 500;
+  font-size: 11px;
+  vertical-align: middle;
+  margin-left: 4px;
+  margin-right: 1px;
+}
+.page-index {
+  padding-top: 30px;
+}

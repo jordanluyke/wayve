@@ -3,7 +3,7 @@ html
     head
         meta(charset="UTF-8")
         meta(name="description" content="Audio signal generator")
-        base(href="/")
+        base(href=`${path}`)
         title Wayve
         link(href=`${path}/node_modules/bootstrap/dist/css/bootstrap.min.css` rel="stylesheet")
         link(href=`${path}/node_modules/roboto-fontface/css/roboto/roboto-fontface.css` rel="stylesheet")
@@ -17,6 +17,7 @@ html
         script(src=`${path}/node_modules/jquery/dist/jquery.slim.min.js`)
         script(src=`${path}/node_modules/bootstrap/dist/js/bootstrap.min.js`)
         script(src=`${path}/node_modules/zone.js/dist/zone.min.js`)
+        script(src=`${path}/node_modules/reflect-metadata/Reflect.js`)
         | !{appScripts}
 
         script.

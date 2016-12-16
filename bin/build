@@ -139,6 +139,8 @@ let copy = () => {
         'octicons',
         'jquery',
         'bootstrap',
+        'zone.js',
+        'reflect-metadata',
     ];
 
     if(argv.dev)
@@ -146,8 +148,6 @@ let copy = () => {
             '@angular',
             'rxjs',
             'es6-shim',
-            'zone.js',
-            'reflect-metadata',
             'systemjs',
         ]);
 

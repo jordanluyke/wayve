@@ -3,21 +3,21 @@ html
     head
         meta(charset="UTF-8")
         meta(name="description" content="Audio signal generator")
-        base(href=`${path}`)
+        base(href="/")
         title Wayve
-        link(href=`${path}/node_modules/bootstrap/dist/css/bootstrap.min.css` rel="stylesheet")
-        link(href=`${path}/node_modules/roboto-fontface/css/roboto/roboto-fontface.css` rel="stylesheet")
-        link(href=`${path}/node_modules/font-awesome/css/font-awesome.min.css` rel="stylesheet")
-        link(href=`${path}/node_modules/octicons/build/octicons.min.css` rel="stylesheet")
-        link(href=`${path}/css/client.css` rel="stylesheet")
+        link(href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet")
+        link(href="/node_modules/roboto-fontface/css/roboto/roboto-fontface.css" rel="stylesheet")
+        link(href="/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet")
+        link(href="/node_modules/octicons/build/octicons.min.css" rel="stylesheet")
+        link(href="/css/client.css" rel="stylesheet")
     body
         include header
         block content
 
-        script(src=`${path}/node_modules/jquery/dist/jquery.slim.min.js`)
-        script(src=`${path}/node_modules/bootstrap/dist/js/bootstrap.min.js`)
-        script(src=`${path}/node_modules/zone.js/dist/zone.min.js`)
-        script(src=`${path}/node_modules/reflect-metadata/Reflect.js`)
+        script(src="/node_modules/jquery/dist/jquery.slim.min.js")
+        script(src="/node_modules/bootstrap/dist/js/bootstrap.min.js")
+        script(src="/node_modules/zone.js/dist/zone.min.js")
+        script(src="/node_modules/reflect-metadata/Reflect.js")
         | !{appScripts}
 
         script.

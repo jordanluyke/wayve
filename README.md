@@ -10,4 +10,4 @@ Multiple time-scheduled audio signals
 
 Query param support:
 
-[https://wayve.jordanluyke.com?entries=[{"frequency":396},{"frequency":399}]&start=true](https://wayve.jordanluyke.com?entries=[{"frequency":396},{"frequency":399}]&start=true)
+[https://wayve.jordanluyke.com?entries=[{"frequency":111},{"frequency":114}]&start=true](https://wayve.jordanluyke.com?entries=[{"frequency":111},{"frequency":114}]&start=true)
